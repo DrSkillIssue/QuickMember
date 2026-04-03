@@ -1,0 +1,23 @@
+QuickMember includes software originally developed by Marc Gravell
+as "FastMember" (https://github.com/mgravell/fast-member),
+licensed under the Apache License, Version 2.0.
+
+Original work: Copyright 2012- Marc Gravell
+Modifications: Copyright 2026- DrSkillIssue
+
+This is a derivative work. All source files have been substantially
+modified from the original FastMember library:
+
+  QuickMember/TypeAccessor.cs
+  QuickMember/ObjectAccessor.cs
+  QuickMember/ObjectReader.cs
+  QuickMember/MemberSet.cs
+  QuickMember/CallSiteCache.cs
+  QuickMember/TypeHelpers.cs
+  QuickMember/OrdinalAttribute.cs
+
+Changes include: performance optimizations (FrozenDictionary, cached
+reflection, struct enumerators, span-based operations, IL emission
+improvements), modernization to .NET 8/10, new features (IsIndexer,
+non-public accessor support, IsKey schema column), namespace rename
+from FastMember to QuickMember, and updated project structure.
