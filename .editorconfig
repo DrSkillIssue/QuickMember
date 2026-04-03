@@ -122,6 +122,10 @@ csharp_style_conditional_delegate_call = true:suggestion
 # Naming rule violations
 dotnet_diagnostic.IDE1006.severity = warning   # Naming rule violation
 
+# Suppressions - established API surface
+dotnet_diagnostic.CA1711.severity = none        # CreateNew is the established API name
+dotnet_diagnostic.CA1010.severity = none        # ObjectReader inherits DbDataReader's IEnumerable
+
 # Performance analyzers (from dotnet/runtime)
 dotnet_diagnostic.CA1802.severity = warning   # Use literals where appropriate
 dotnet_diagnostic.CA1805.severity = warning   # Do not initialize unnecessarily

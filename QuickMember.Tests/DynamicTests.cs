@@ -1,6 +1,6 @@
-﻿using QuickMember;
+﻿using System.Dynamic;
 using Microsoft.CSharp.RuntimeBinder;
-using System.Dynamic;
+using QuickMember;
 using Xunit;
 
 namespace QuickMember.Tests;

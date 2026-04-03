@@ -271,109 +271,109 @@ public class ObjectReader : DbDataReader
         }
     }
 
-    public override bool GetBoolean(int i)
+    public override bool GetBoolean(int ordinal)
     {
-        return (bool)_accessor[_current, _memberNames[i]];
+        return (bool)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override byte GetByte(int i)
+    public override byte GetByte(int ordinal)
     {
-        return (byte)_accessor[_current, _memberNames[i]];
+        return (byte)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
+    public override long GetBytes(int ordinal, long dataOffset, byte[] buffer, int bufferOffset, int length)
     {
-        byte[] s = (byte[])_accessor[_current, _memberNames[i]];
-        int available = s.Length - (int)fieldOffset;
+        byte[] s = (byte[])_accessor[_current, _memberNames[ordinal]];
+        int available = s.Length - (int)dataOffset;
         if (available <= 0) return 0;
 
         int count = Math.Min(length, available);
 #if NET8_0_OR_GREATER
-        s.AsSpan((int)fieldOffset, count).CopyTo(buffer.AsSpan(bufferoffset, count));
+        s.AsSpan((int)dataOffset, count).CopyTo(buffer.AsSpan(bufferOffset, count));
 #else
-        Buffer.BlockCopy(s, (int)fieldOffset, buffer, bufferoffset, count);
+        Buffer.BlockCopy(s, (int)dataOffset, buffer, bufferOffset, count);
 #endif
         return count;
     }
 
-    public override char GetChar(int i)
+    public override char GetChar(int ordinal)
     {
-        return (char)_accessor[_current, _memberNames[i]];
+        return (char)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
+    public override long GetChars(int ordinal, long dataOffset, char[] buffer, int bufferOffset, int length)
     {
-        string s = (string)_accessor[_current, _memberNames[i]];
-        int available = s.Length - (int)fieldoffset;
+        string s = (string)_accessor[_current, _memberNames[ordinal]];
+        int available = s.Length - (int)dataOffset;
         if (available <= 0) return 0;
 
         int count = Math.Min(length, available);
 #if NET8_0_OR_GREATER
-        s.AsSpan((int)fieldoffset, count).CopyTo(buffer.AsSpan(bufferoffset, count));
+        s.AsSpan((int)dataOffset, count).CopyTo(buffer.AsSpan(bufferOffset, count));
 #else
-        s.CopyTo((int)fieldoffset, buffer, bufferoffset, count);
+        s.CopyTo((int)dataOffset, buffer, bufferOffset, count);
 #endif
         return count;
     }
 
-    protected override DbDataReader GetDbDataReader(int i)
+    protected override DbDataReader GetDbDataReader(int ordinal)
     {
         throw new NotSupportedException();
     }
 
-    public override string GetDataTypeName(int i)
+    public override string GetDataTypeName(int ordinal)
     {
-        return _effectiveTypes[i].Name;
+        return _effectiveTypes[ordinal].Name;
     }
 
-    public override DateTime GetDateTime(int i)
+    public override DateTime GetDateTime(int ordinal)
     {
-        return (DateTime)_accessor[_current, _memberNames[i]];
+        return (DateTime)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override decimal GetDecimal(int i)
+    public override decimal GetDecimal(int ordinal)
     {
-        return (decimal)_accessor[_current, _memberNames[i]];
+        return (decimal)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override double GetDouble(int i)
+    public override double GetDouble(int ordinal)
     {
-        return (double)_accessor[_current, _memberNames[i]];
+        return (double)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override Type GetFieldType(int i)
+    public override Type GetFieldType(int ordinal)
     {
-        return _effectiveTypes[i];
+        return _effectiveTypes[ordinal];
     }
 
-    public override float GetFloat(int i)
+    public override float GetFloat(int ordinal)
     {
-        return (float)_accessor[_current, _memberNames[i]];
+        return (float)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override Guid GetGuid(int i)
+    public override Guid GetGuid(int ordinal)
     {
-        return (Guid)_accessor[_current, _memberNames[i]];
+        return (Guid)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override short GetInt16(int i)
+    public override short GetInt16(int ordinal)
     {
-        return (short)_accessor[_current, _memberNames[i]];
+        return (short)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override int GetInt32(int i)
+    public override int GetInt32(int ordinal)
     {
-        return (int)_accessor[_current, _memberNames[i]];
+        return (int)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override long GetInt64(int i)
+    public override long GetInt64(int ordinal)
     {
-        return (long)_accessor[_current, _memberNames[i]];
+        return (long)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override string GetName(int i)
+    public override string GetName(int ordinal)
     {
-        return _memberNames[i];
+        return _memberNames[ordinal];
     }
 
     public override int GetOrdinal(string name)
@@ -394,14 +394,14 @@ public class ObjectReader : DbDataReader
         return lookup.TryGetValue(name, out int ordinal) ? ordinal : -1;
     }
 
-    public override string GetString(int i)
+    public override string GetString(int ordinal)
     {
-        return (string)_accessor[_current, _memberNames[i]];
+        return (string)_accessor[_current, _memberNames[ordinal]];
     }
 
-    public override object GetValue(int i)
+    public override object GetValue(int ordinal)
     {
-        return _accessor[_current, _memberNames[i]] ?? DBNull.Value;
+        return _accessor[_current, _memberNames[ordinal]] ?? DBNull.Value;
     }
 
     public override IEnumerator GetEnumerator() => new DbEnumerator(this);
@@ -419,9 +419,9 @@ public class ObjectReader : DbDataReader
         return count;
     }
 
-    public override bool IsDBNull(int i)
+    public override bool IsDBNull(int ordinal)
     {
-        return _accessor[_current, _memberNames[i]] == null;
+        return _accessor[_current, _memberNames[ordinal]] == null;
     }
 
     /// <summary>
@@ -438,9 +438,9 @@ public class ObjectReader : DbDataReader
     /// Gets the value of the member at the specified column ordinal on the current row.
     /// Returns <see cref="DBNull.Value"/> if the underlying value is <c>null</c>.
     /// </summary>
-    /// <param name="i">The zero-based column ordinal.</param>
-    public override object this[int i]
+    /// <param name="ordinal">The zero-based column ordinal.</param>
+    public override object this[int ordinal]
     {
-        get { return _accessor[_current, _memberNames[i]] ?? DBNull.Value; }
+        get { return _accessor[_current, _memberNames[ordinal]] ?? DBNull.Value; }
     }
 }

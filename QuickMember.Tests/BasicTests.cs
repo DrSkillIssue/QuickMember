@@ -1,7 +1,7 @@
-﻿using QuickMember;
-using System;
+﻿using System;
 using System.Data;
 using System.Linq;
+using QuickMember;
 using Xunit;
 
 namespace QuickMember.Tests;
